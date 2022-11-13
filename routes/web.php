@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\AdminDataController;
+use App\Http\Controllers\admin\AdminLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.main');
+});
+Route::get('/movies', function () {
+    return view('frontend.category.moviesDetail');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('Admin')
+    ->as('Admin.')
+    ->controller(AdminLoginController::class)
+    ->group(function () {
+
+        Route::get('Login', 'adminLoginView')->name('Admin');
+        Route::post('AdminLogin', 'adminLogin')->name('AdminLogin');
+
+    });
+
+Route::prefix('Admin')
+    ->as('Admin.')
+    ->middleware('is_admin')
+    ->controller(AdminDataController::class)
+    ->group(function () {
+
+        Route::get('/Dashboard', 'adminDashboard')->name('Dashboard');
+
+    });
