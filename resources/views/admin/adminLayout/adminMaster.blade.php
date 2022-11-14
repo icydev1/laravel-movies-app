@@ -6,8 +6,11 @@
     <title>Icy Admin</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url('/') }}">
+    <input type="hidden" id="namePath" data-path="/JobPortal">
 
-
+    @vite([ 'resources/js/app.js'])
     @include('admin.adminlayout.css')
 
    <style>

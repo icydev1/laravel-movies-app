@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.main');
 });
-Route::get('/movies', function () {
-    return view('frontend.category.moviesDetail');
-});
+
 
 
 

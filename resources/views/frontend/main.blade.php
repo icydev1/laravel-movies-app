@@ -3,17 +3,17 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{{asset('/images/icon.png')}}" >
-  <title>Icy Movies</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('/images/icon.png') }}">
+    <title>Icy Movies</title>
 
-  <!--
+    <!--
     - custom css link
   -->
 
-@include('frontend.css')
+    @include('frontend.css')
 
 </head>
 
@@ -22,134 +22,132 @@
 
 
 
-  <!--
+    <!--
     - main container
   -->
-  <div class="container">
+    <div class="container">
 
-    <!--
+        <!--
       - #HEADER SECTION
     -->
 
-    <header class="">
+        <header class="">
 
-        {{-- navbar start --}}
+            {{-- navbar start --}}
 
-        @include('frontend.navbar')
+            @include('frontend.navbar')
 
-        {{-- navbar end --}}
+            {{-- navbar end --}}
 
-    </header>
-
-
+        </header>
 
 
 
-    <!--
+
+
+        <!--
       - MAIN SECTION
     -->
-    <main>
+        <main>
 
-        @if ($homeRoute != '/')
-        @dump($homeRoute)
-        @yield('content')
+            @if ($homeRoute != '/')
+                @yield('content')
+            @endif
 
-        @endif
-
-      <!--
+            <!--
         - #BANNER SECTION
       -->
 
-      @if($homeRoute == '/')
-      <section class="banner">
+            @if ($homeRoute == '/')
+                <section class="banner">
 
-        @include('frontend.banner')
+                    @include('frontend.banner')
 
-      </section>
-
-
+                </section>
 
 
 
 
-      <!--
+
+
+                <!--
         - #MOVIES SECTION
       -->
-      <section class="movies">
+                <section class="movies">
 
-        <!--
+                    <!--
           - filter bar
         -->
 
-        @include('frontend.filter')
+                    @include('frontend.filter')
 
 
-        <!--
+                    <!--
           - movies grid
         -->
 
-        @include('frontend.moviesGrid')
+                    @include('frontend.moviesGrid')
 
-        <!--
+                    <!--
           - load more button
         -->
-        <button class="load-more">LOAD MORE</button>
+                    <button class="load-more">LOAD MORE</button>
 
-      </section>
-
-
+                </section>
 
 
 
-      <!--
+
+
+                <!--
         - #CATEGORY SECTION
       -->
-      <section class="category" id="category">
+                <section class="category" id="category">
 
-        @include('frontend.category')
+                    @include('frontend.category')
 
-      </section>
-
-
+                </section>
 
 
 
-      <!--
+
+
+                <!--
         - #LIVE SECTION
       -->
-      <section class="live" id="live">
+                <section class="live" id="live">
 
-        @include('frontend.liveTV')
+                    @include('frontend.liveTV')
 
-      </section>
-      @endif
+                </section>
+            @endif
 
-    </main>
+        </main>
+
+
+
+
+
+        <!--
+      - FOOTER SECTION
+    -->
+        <footer>
+
+            @include('frontend.footer')
+
+        </footer>
+
+    </div>
 
 
 
 
 
     <!--
-      - FOOTER SECTION
-    -->
-    <footer>
-
-     @include('frontend.footer')
-
-    </footer>
-
-  </div>
-
-
-
-
-
-  <!--
     - custom js link
   -->
 
-@include('frontend.script')
+    @include('frontend.script')
 
 </body>
 
