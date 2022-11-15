@@ -10,7 +10,7 @@
     <meta name="base-url" content="{{ url('/') }}">
     <input type="hidden" id="namePath" data-path="/JobPortal">
 
-    @vite([ 'resources/js/app.js'])
+
     @include('admin.adminlayout.css')
 
    <style>

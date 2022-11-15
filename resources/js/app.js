@@ -14,5 +14,4 @@ import './bootstrap';
 
 import './components/Example';
 
-import jQuery from 'jquery';
-window.$ = jQuery;
+
