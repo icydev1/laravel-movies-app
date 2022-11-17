@@ -1,219 +1,188 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-<script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="{{asset('/assets/js/core/popper.min.js')}}"></script>
+  <script src="{{asset('/assets/js/core/bootstrap.min.js')}}"></script>
+  <script src="{{asset('/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{asset('/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="{{asset('/assets/js/plugins/chartjs.min.js')}}"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
 
-
-<!--  Chart js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
-
-<!--Chartist Chart-->
-<script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-<script src="assets/js/init/weather-init.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-<script src="{{asset('assets/js/init/fullcalendar-init.js')}}"></script>
-<script src="{{asset('admin/ajax.js')}}"></script>
-
-
-<script>
-    jQuery(document).ready(function($) {
-        "use strict";
-
-        // Pie chart flotPie1
-        var piedata = [
-            { label: "Desktop visits", data: [[1,32]], color: '#5c6bc0'},
-            { label: "Tab visits", data: [[1,33]], color: '#ef5350'},
-            { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
-        ];
-
-        $.plot('#flotPie1', piedata, {
-            series: {
-                pie: {
-                    show: true,
-                    radius: 1,
-                    innerRadius: 0.65,
-                    label: {
-                        show: true,
-                        radius: 2/3,
-                        threshold: 1
-                    },
-                    stroke: {
-                        width: 0
-                    }
-                }
-            },
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Sales",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "#fff",
+          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+          maxBarThickness: 6
+        }, ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
             grid: {
-                hoverable: true,
-                clickable: true
-            }
-        });
-        // Pie chart flotPie1  End
-        // cellPaiChart
-        var cellPaiChart = [
-            { label: "Direct Sell", data: [[1,65]], color: '#5b83de'},
-            { label: "Channel Sell", data: [[1,35]], color: '#00bfa5'}
-        ];
-        $.plot('#cellPaiChart', cellPaiChart, {
-            series: {
-                pie: {
-                    show: true,
-                    stroke: {
-                        width: 0
-                    }
-                }
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
             },
-            legend: {
-                show: false
-            },grid: {
-                hoverable: true,
-                clickable: true
-            }
-
-        });
-        // cellPaiChart End
-        // Line Chart  #flotLine5
-        var newCust = [[0, 3], [1, 5], [2,4], [3, 7], [4, 9], [5, 3], [6, 6], [7, 4], [8, 10]];
-
-        var plot = $.plot($('#flotLine5'),[{
-            data: newCust,
-            label: 'New Data Flow',
-            color: '#fff'
-        }],
-        {
-            series: {
-                lines: {
-                    show: true,
-                    lineColor: '#fff',
-                    lineWidth: 2
-                },
-                points: {
-                    show: true,
-                    fill: true,
-                    fillColor: "#ffffff",
-                    symbol: "circle",
-                    radius: 3
-                },
-                shadowSize: 0
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 15,
+              font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
             },
-            points: {
-                show: true,
-            },
-            legend: {
-                show: false
-            },
+          },
+          x: {
             grid: {
-                show: false
-            }
-        });
-        // Line Chart  #flotLine5 End
-        // Traffic Chart using chartist
-        if ($('#traffic-chart').length) {
-            var chart = new Chartist.Line('#traffic-chart', {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-              series: [
-              [0, 18000, 35000,  25000,  22000,  0],
-              [0, 33000, 15000,  20000,  15000,  300],
-              [0, 15000, 28000,  15000,  30000,  5000]
-              ]
-          }, {
-              low: 0,
-              showArea: true,
-              showLine: false,
-              showPoint: false,
-              fullWidth: true,
-              axisX: {
-                showGrid: true
-            }
-        });
-
-            chart.on('draw', function(data) {
-                if(data.type === 'line' || data.type === 'area') {
-                    data.element.animate({
-                        d: {
-                            begin: 2000 * data.index,
-                            dur: 2000,
-                            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                            to: data.path.clone().stringify(),
-                            easing: Chartist.Svg.Easing.easeOutQuint
-                        }
-                    });
-                }
-            });
-        }
-        // Traffic Chart using chartist End
-        //Traffic chart chart-js
-        if ($('#TrafficChart').length) {
-            var ctx = document.getElementById( "TrafficChart" );
-            ctx.height = 150;
-            var myChart = new Chart( ctx, {
-                type: 'line',
-                data: {
-                    labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
-                    datasets: [
-                    {
-                        label: "Visit",
-                        borderColor: "rgba(4, 73, 203,.09)",
-                        borderWidth: "1",
-                        backgroundColor: "rgba(4, 73, 203,.5)",
-                        data: [ 0, 2900, 5000, 3300, 6000, 3250, 0 ]
-                    },
-                    {
-                        label: "Bounce",
-                        borderColor: "rgba(245, 23, 66, 0.9)",
-                        borderWidth: "1",
-                        backgroundColor: "rgba(245, 23, 66,.5)",
-                        pointHighlightStroke: "rgba(245, 23, 66,.5)",
-                        data: [ 0, 4200, 4500, 1600, 4200, 1500, 4000 ]
-                    },
-                    {
-                        label: "Targeted",
-                        borderColor: "rgba(40, 169, 46, 0.9)",
-                        borderWidth: "1",
-                        backgroundColor: "rgba(40, 169, 46, .5)",
-                        pointHighlightStroke: "rgba(40, 169, 46,.5)",
-                        data: [1000, 5200, 3600, 2600, 4200, 5300, 0 ]
-                    }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    }
-
-                }
-            } );
-        }
-        //Traffic chart chart-js  End
-        // Bar Chart #flotBarChart
-        $.plot("#flotBarChart", [{
-            data: [[0, 18], [2, 8], [4, 5], [6, 13],[8,5], [10,7],[12,4], [14,6],[16,15], [18, 9],[20,17], [22,7],[24,4], [26,9],[28,11]],
-            bars: {
-                show: true,
-                lineWidth: 0,
-                fillColor: '#ffffff8a'
-            }
-        }], {
-            grid: {
-                show: false
-            }
-        });
-        // Bar Chart #flotBarChart End
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false
+            },
+            ticks: {
+              display: false
+            },
+          },
+        },
+      },
     });
-</script>
+
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#3A416F",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+            maxBarThickness: 6
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.6"></script>
